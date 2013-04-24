@@ -14,5 +14,5 @@ m2/repository/properties/maven/plugin/maven-properties-checker/1.0/
 After checkout the project source code execute: <br/>
 mvn clean package  <br/>
 
-After to import the project in Eclipse: <br/>
+After, to import the project in Eclipse: <br/>
 mvn eclipse:clean eclipse:eclipse <br/>
