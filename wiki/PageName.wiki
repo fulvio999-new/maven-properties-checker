@@ -9,7 +9,7 @@ To install in your local repository unpack the zip content under:
 m2/repository/properties/maven/plugin/maven-properties-checker/1.0/
 
 
-= For developers =
+=== For developers ===
 
 After checkout the project execute:
 mvn clean package
