@@ -1,0 +1,155 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+ 
+ 
+  <groupId>properties.maven.plugin</groupId>  
+  <artifactId>maven-properties-checker</artifactId>  
+  <packaging>maven-plugin</packaging>
+  <version>1.0</version>
+  <description>
+     This is a Maven plugin that apply some checks a java.util.properties files.
+     The cheks name are fixed, and are:
+     BLANK_VALUES : check the presence of property key without associated value, if found the build fails
+     EMPTY_SPACES_END : check the presence of blank space(s) at the end of a property key, if found stop the build
+     CUSTOM_REGEXP : apply a check based on a user defined regular expression: if the regular expression matches the build fails
+  </description>
+
+  <name>maven-properties-checker</name>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+
+     <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <version>2.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>      
+      <version>3.0.9</version> 
+    </dependency>
+
+    <!-- To use Java 5 annotations in Mojos. -->
+    <dependency>
+      <groupId>org.apache.maven.plugin-tools</groupId>
+      <artifactId>maven-plugin-annotations</artifactId>
+      <version>3.2</version>
+      <scope>provided</scope>
+    </dependency>
+
+ 
+   </dependencies>
+
+    <build>
+	  <plugins>
+
+	     <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-eclipse-plugin</artifactId>		
+		 </plugin>
+
+	     <plugin>
+		   <groupId>org.apache.maven.plugins</groupId>
+		   <artifactId>maven-compiler-plugin</artifactId>
+		   <configuration>
+			  <source>1.5</source>
+			  <target>1.5</target>
+		   </configuration>
+	     </plugin>
+
+	      
+	    <!-- Plugin used to create in auto the plugin.xml descriptor that will be placed under META-INF/ folder -->  
+	    <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-plugin-plugin</artifactId>
+	        <version>3.2</version>
+	        <configuration>
+	          <!-- see http://jira.codehaus.org/browse/MNG-5346 -->
+	          <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+	        </configuration>
+	        <executions>
+	          <!-- To gnerate in automatic the plugin descriptor -->
+	          <execution>
+	            <id>mojo-descriptor</id>
+	            <goals>
+	              <goal>descriptor</goal>
+	            </goals>
+	          </execution>
+	          <!-- To generate the Mojo associated at the "help" goal -->
+	          <execution>
+	            <id>help-goal</id>
+	            <goals>
+	              <goal>helpmojo</goal>
+	            </goals>
+	          </execution>
+	        </executions>
+        </plugin>  
+        
+        
+       <!-- Plugin to use the "Modello" project: a Data Model toolkit that given a model can generate java pojo  -->
+       <plugin>
+	      <groupId>org.codehaus.modello</groupId>
+	      <artifactId>modello-maven-plugin</artifactId>
+	      <version>1.7</version>
+	        
+	      <configuration>
+	          <models>
+	            <model>src/main/mdo/checks.mdo</model>
+	          </models>
+	          <version>1.0.0</version>
+	      </configuration>
+	        
+	      <executions>
+	          
+	          <!-- During this phase will be executed the goals "java" and "xpp3-reader" to create java bean and xpp reader 
+	          	   the pojo will be placed by default in target/generated-sources/modello
+	          -->
+	          <execution>
+	            <id>myModel</id>
+	            <phase>generate-sources</phase>
+	            <goals>	              
+	              <goal>java</goal>	              
+	              <goal>xpp3-reader</goal>
+	            </goals>
+	          </execution>
+	          
+	          <!-- During this phase will be execute the goals "xsd" which generate an XML Schema for the model  -->
+	          <execution>
+	            <id>myModel-site-xsd</id>
+	            <phase>pre-site</phase>
+	            <goals>
+	              <goal>xsd</goal>
+	            </goals>
+	            <configuration>
+	              <!-- (optional) the folder where place the generated xsd -->
+	              <outputDirectory>target/generated-site/resources/xsd</outputDirectory>
+	            </configuration>
+	          </execution>
+	          
+	          <execution>
+	            <id>myModel-site-doc</id>
+	            <phase>pre-site</phase>
+	            <goals>
+	              <goal>xdoc</goal>
+	            </goals>
+	          </execution>
+	          
+	        </executions>
+      </plugin>
+
+
+	  </plugins>
+    </build>
+
+
+  
+</project>
