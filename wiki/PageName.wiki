@@ -1,0 +1,18 @@
+#Installation.
+
+= Installation =
+
+This plugin is not provide in Maven repository. So that is necessary install it in your enterprise repository (eg Artifactory) o in your local repository.
+
+To install in your local repository unpack the zip content under: 
+
+m2/repository/properties/maven/plugin/maven-properties-checker/1.0/
+
+
+= For developers =
+
+After checkout the project execute:
+mvn clean package
+
+After to import the project in Eclipse:
+mvn eclipse:clean eclipse:eclipse
