@@ -1,0 +1,108 @@
+<model xmlns="http://modello.codehaus.org/MODELLO/1.0.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://modello.codehaus.org/MODELLO/1.0.0 http://modello.codehaus.org/xsd/modello-1.0.0.xsd">
+       
+  <id/>
+  <name>PropertiesCheckerName</name>  
+  <description>
+      Modello file for the checks to perform against the provided java properties file(s) 
+  </description>
+  <defaults>   
+    <default>      
+      <key>package</key>
+      <value>property.maven.plugin</value>
+    </default>
+  </defaults>
+  
+  <classes>   
+    <class rootElement="true"  xml.tagName="propertyChecker">      
+      <name>PropertyChecker</name>
+      <version>1.0.0</version>
+      <description>
+      	  Root element of the property checks file.
+      </description>      
+      <fields>        
+        <field>
+          <name>checkBlock</name>
+          <version>1.0.0</version>
+          <description>
+          <![CDATA[
+               A block that contains the file location an the checks to performs on it.
+          ]]>
+          </description>          
+          <association xml.itemsStyle="flat">
+            <type>CheckBlock</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        
+      </fields>
+   </class>     
+    
+    
+   <!-- represents a "checkBlock" xml block -->
+   <class>
+      <name>CheckBlock</name>
+      <version>1.0.0</version>
+      <fields>
+        <field>
+          <name>fileLocation</name>
+          <version>1.0.0</version>
+          <required>true</required>
+          <description>
+             <![CDATA[ The relative path of the properties file to check ]]>
+          </description>
+          <type>String</type>
+        </field>
+        
+        <field>
+          <name>checks</name>
+          <version>1.0.0</version>
+          <required>true</required>
+          <description>
+             <![CDATA[The name of the check to apply at the properties file picked up from a default list]]>
+          </description>
+          <association xml.itemsStyle="wrapped">
+             <type>Check</type>
+             <multiplicity>*</multiplicity>
+          </association>
+        </field>
+         
+      </fields>
+   </class>
+    
+    
+  <!-- represents a "check" xml block -->
+   <class>
+      <name>Check</name>
+      <version>1.0.0</version>
+      <fields>
+      
+        <field>
+          <name>checkName</name>
+          <version>1.0.0</version>
+          <required>true</required>
+          <description>
+             <![CDATA[ The name of the check picked up from a default list ]]>
+          </description>
+          <type>String</type>
+        </field>
+        
+        <field>
+          <name>checkValue</name>
+          <version>1.0.0</version>
+          <required>false</required>
+          <description>
+             <![CDATA[ An input value for the check, used to use a custom regexp ]]>
+          </description>
+          <type>String</type>
+        </field>
+        
+      </fields>
+   </class>
+   
+  
+      
+    
+  </classes>
+</model>
