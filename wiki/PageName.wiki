@@ -12,7 +12,7 @@ To install in your local repository unpack the zip content under:
 === For developers ===
 
 After checkout the project source code execute: <br/>
-mvn clean package  <br/>
+* mvn clean package * <br/> 
 
 After, to import the project in Eclipse: <br/>
-mvn eclipse:clean eclipse:eclipse <br/>
+* mvn eclipse:clean eclipse:eclipse * <br/>
