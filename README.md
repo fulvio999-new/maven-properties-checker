@@ -12,4 +12,7 @@ Features:
 
 - apply a custom check based on user defined regular expression
 
-For more info e usage visit: http://iutility.blogspot.it/2013/04/maven-properties-checker.html 
+For more info and usage about this plugin visit: http://iutility.blogspot.it/2013/04/maven-properties-checker.html 
+
+(If you need more general info about Maven plugin development look at:  
+http://iutility.blogspot.it/2013/04/my-guide-on-slidesharenet-about-maven.html )
